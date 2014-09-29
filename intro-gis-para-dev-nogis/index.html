@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Tutorial 5: Filtrar un feature service</title>
+
+  <link rel="stylesheet" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
+  <style>
+    html, body, #mapDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+  </style>
+
+  <script src="http://js.arcgis.com/3.10/"></script>
+  <script>
+    var map;
+
+    require([
+      "esri/map",
+      "esri/layers/FeatureLayer",
+      "dojo/domReady!",
+    ], function(Map, FeatureLayer) {
+
+      map = new Map("mapDiv", {
+        center: [-3.674, 40.439],
+        zoom: 17,
+        basemap: "streets"
+      });
+
+      var urlLocales = "http://54.217.224.125/arcgis/rest/services/Test_JAMI/G_LOCALES_ACTIVIDADES_COMPLETO/MapServer/0";
+      var featureLayer = new FeatureLayer(urlLocales);
+      featureLayer.setDefinitionExpression("desc_situacion_local = 'Cerrado'");
+      map.addLayer(featureLayer);
+
+
+    });
+  </script>
+</head>
+<body class="claro">
+  <div id="mapDiv"></div>
+</body>
+</html>
